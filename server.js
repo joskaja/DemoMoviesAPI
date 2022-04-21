@@ -5,8 +5,8 @@ const cors = require('cors');
 
 const connectDB = require('./config/db');
 const { handleError } = require('./middleware/errorMiddleware');
-
 const { ApolloServer } = require('apollo-server-express');
+const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core');
 const { typeDefs, resolvers } = require('./graphql');
 
 
@@ -23,7 +23,10 @@ app.use(handleError);
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    introspection: true
+    introspection: true,
+    plugins: [
+        ApolloServerPluginLandingPageGraphQLPlayground()
+    ]
 });
 server.start().then(() => {
     server.applyMiddleware({
