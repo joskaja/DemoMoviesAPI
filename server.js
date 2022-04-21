@@ -23,6 +23,7 @@ app.use(handleError);
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    introspection: true
 });
 server.start().then(() => {
     server.applyMiddleware({
