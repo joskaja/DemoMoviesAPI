@@ -11,7 +11,7 @@ const typeDefs = gql`
         description: String
         year: Int
         director: Director!
-        genres: [Genre!]
+        genres: [Genre!]!
     }
 
     input CreateMovieInput {
@@ -32,21 +32,23 @@ const typeDefs = gql`
     }
 
     type Director {
-        name: ID!
+        id: ID!
+        name: String!
         countryOfOrigin: String
         dateOfBirth: String
-        movies: [Movie!]
+        movies: [Movie!]!
     }
 
     input CreateDirectorInput {
-        name: ID!
+        name: String!
         countryOfOrigin: String = "USA"
         dateOfBirth: String
         movies: [ID!]
     }
 
     input UpdateDirectorInput {
-        name: ID!
+        id: ID!
+        name: String
         countryOfOrigin: String
         dateOfBirth: String
         movies: [ID!]
@@ -55,7 +57,7 @@ const typeDefs = gql`
     type Genre {
         id: ID!
         name: String!
-        movies: [Movie!]
+        movies: [Movie!]!
     }
 
     input CreateGenreInput {
@@ -66,15 +68,15 @@ const typeDefs = gql`
     input UpdateGenreInput {
         id: ID!
         name: String
-        movies: [ID!]
+        movies: [ID!]!
     }
 
     type Query {
-        movies: [Movie]
+        movies: [Movie!]!
         movie(id: ID!): Movie 
-        directors: [Director]
+        directors: [Director!]!
         director(id: ID!): Director
-        genres: [Genre]
+        genres: [Genre!]!
         genre(id: ID!): Genre
     }
 
